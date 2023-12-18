@@ -1,6 +1,5 @@
 import streamlit as st
 from utils import write_message
-from agent import generate_response
 
 
 # Cofigurando a página
@@ -13,6 +12,7 @@ if "messages" not in st.session_state:
     ]
 
 
+from agent import generate_response
 # Submetendo o handler.
 def handle_submit(message):
     # Manipulando a resposta.
@@ -22,7 +22,7 @@ def handle_submit(message):
         write_message('assistant', response)
 
 
-# tag::chat[]
+
 with st.container():
     # Display messages in Session State
     for message in st.session_state.messages:
@@ -35,4 +35,4 @@ with st.container():
 
         # Generate a response
         handle_submit(prompt)
-# end::chat[]
+
