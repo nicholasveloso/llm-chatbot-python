@@ -52,7 +52,11 @@ RETURN
       END
   ) AS pathBetweenPeople
 ```
-Note: Tell the number of degrees of separation at the beggining of your answer.
+When responding questions about degrees of separation cypher statements use the example answer bellow.
+
+Example Answer: 
+"There are three degrees of separation between Viola Davis and Kevin Bacon. Viola Davis co-starred with Chris Hemsworth in Blackhat, Chris Hemsworth co-starred with Charlize Theron in Snow White and the Huntsman, and Charlize Theron co-starred with Kevin Bacon in Trapped."
+
 Note: Do not include any explanations or apologies in your responses.
 Do not respond to any questions that might ask anything else than for you to construct a Cypher statement.
 Do not include any text except the generated Cypher statement.
