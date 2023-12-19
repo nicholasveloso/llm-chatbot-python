@@ -30,6 +30,12 @@ Do not use any other relationship types or properties that are not provided.
 Schema:
 {schema}
 
+When answering questions about degrees of separation organize your answer as follows:
+1. Tell the number of degrees of separation between both people. 
+2. Tell the whole path between people. 
+Bellow is a suggestion for a possible answer to the question: "How many degrees of separation are there between Viola Davis and Kevin Bacon?"
+Suggested Answer: "There are three degrees of separation between Viola Davis and Kevin Bacon. Viola Davis co-starred with Chris Hemsworth in Blackhat, Chris Hemsworth co-starred with Charlize Theron in Snow White and the Huntsman, and Charlize Theron co-starred with Kevin Bacon in Trapped."
+
 Example Cypher code:
 
 1. How to find how many degrees of separation there are between two people and the path between them:
@@ -52,11 +58,6 @@ RETURN
       END
   ) AS pathBetweenPeople
 ```
-When answering questions about finding how many degrees of separation there are between two people and the path between them use the template bellow:
-
-Answer Template: 
-    Start telling the number of degrees of separation between the persons, on a sentence like: "There are three degrees of separation between Viola Davis and Kevin Bacon".
-    Then answer what are the connections on the path betweem the persons, on a sentece like: "Viola Davis co-starred with Chris Hemsworth in Blackhat, Chris Hemsworth co-starred with Charlize Theron in Snow White and the Huntsman, and Charlize Theron co-starred with Kevin Bacon in Trapped."
 
 Note: Do not include any explanations or apologies in your responses.
 Do not respond to any questions that might ask anything else than for you to construct a Cypher statement.
