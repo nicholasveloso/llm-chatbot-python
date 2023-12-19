@@ -1,36 +1,25 @@
 import streamlit as st
 from utils import write_message
+from agent import generate_response
 
-# tag::setup[]
-# Page Config
+
+# Cofigurando a página
 st.set_page_config("Ebert", page_icon=":movie_camera:")
-# end::setup[]
 
-# tag::session[]
-# Set up Session State
+# Configurando o estado da sessão.
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {"role": "assistant", "content": "Hi, I'm the GraphAcademy Chatbot!  How can I help you?"},
     ]
-# end::session[]
 
-# tag::submit[]
-# Submit handler
+
+# Submetendo o handler.
 def handle_submit(message):
-    """
-    Submit handler:
-
-    You will modify this method to talk with an LLM and provide
-    context using data from Neo4j.
-    """
-
-    # Handle the response
+    # Manipulando a resposta.
     with st.spinner('Thinking...'):
-        # # TODO: Replace this with a call to your LLM
-        from time import sleep
-        sleep(1)
-        write_message('assistant', message)
-# end::submit[]
+
+        response = generate_response(message)
+        write_message('assistant', response)
 
 
 # tag::chat[]
