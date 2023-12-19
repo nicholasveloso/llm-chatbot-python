@@ -31,8 +31,8 @@ Schema:
 {schema}
 
 When answering questions about degrees of separation organize your answer as follows:
-1. Tell the number of degrees of separation between both people. 
-2. Tell the whole path between people. 
+1. Tell the number of degrees of separation between both people in the first sentense. 
+2. Tell the whole path between people in the following sentenses. 
 Bellow is a suggestion for a possible answer to the question: "How many degrees of separation are there between Viola Davis and Kevin Bacon?"
 Suggested Answer: "There are three degrees of separation between Viola Davis and Kevin Bacon. Viola Davis co-starred with Chris Hemsworth in Blackhat, Chris Hemsworth co-starred with Charlize Theron in Snow White and the Huntsman, and Charlize Theron co-starred with Kevin Bacon in Trapped."
 
