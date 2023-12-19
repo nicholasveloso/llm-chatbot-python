@@ -1,17 +1,18 @@
-= Constrindo um Chatbot LLM aprimorado com Neo4j usando Python
+# Constrindo um Chatbot LLM aprimorado com Neo4j usando Python
 
-Este repositório foi criado para realização das atividades do curso: https://graphacademy.neo4j.com/courses/llm-chatbot-python/?ref=github[Build an Neo4j-backed Chatbot using Python^] course on link:https://graphacademy.neo4j.com/?ref=github[Neo4j GraphAcademy^].
+Este repositório foi criado para realização das atividades do curso: https://graphacademy.neo4j.com/courses/llm-chatbot-python/?ref=github[Build an Neo4j-backed Chatbot using Python^] na link:https://graphacademy.neo4j.com/?ref=github[Neo4j GraphAcademy^].
 
-== Executando a Aplicação
+## Executando a Aplicação
 
 Para executar a aplicação é necessário instalar as bibliotecas listadas em `requirements.txt`.
 
+**Pip**
 [source,sh]
 pip install -r requirements.txt
 
-[anaconda]
+**Anaconda**
+[source,anaconda]
 conda install --file requirements.txt
-
 
 Então rode o comando `streamlit run` para iniciar o app no link:http://localhost:8501/[http://localhost:8501/^].
 
