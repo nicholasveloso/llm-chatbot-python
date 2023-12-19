@@ -4,7 +4,7 @@ from agent import generate_response
 
 
 # Cofigurando a página
-st.set_page_config("Ebert", page_icon=":movie_camera:")
+st.set_page_config("Ebert, a movie expert to call your own!", page_icon=":movie_camera:")
 
 # Configurando o estado da sessão.
 if "messages" not in st.session_state:
@@ -13,7 +13,7 @@ if "messages" not in st.session_state:
     ]
 
 
-# Submetendo o handler.
+# Submetendo a função manipulador (Handler Function).
 def handle_submit(message):
     # Manipulando a resposta.
     with st.spinner('Thinking...'):
@@ -22,17 +22,16 @@ def handle_submit(message):
         write_message('assistant', response)
 
 
-# tag::chat[]
+# Criar a interface do Chat.
 with st.container():
-    # Display messages in Session State
+    # Mostrar a mensagem mensagem armazenada no estado da sessão.
     for message in st.session_state.messages:
         write_message(message['role'], message['content'], save=False)
 
-    # Handle any user input
+    # Lidando com qualquer entrada do usuário.
     if prompt := st.chat_input("What is up?"):
-        # Display user message in chat message container
+        # Exibir mensagem do usuário no contêiner de mensagens de bate-papo. 
         write_message('user', prompt)
 
-        # Generate a response
+        # Gerar uma resposta.
         handle_submit(prompt)
-# end::chat[]

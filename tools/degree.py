@@ -17,7 +17,7 @@ from llm import llm
 from graph import graph
 
 # Criar a variável com o template do prompt a ser usado para geração de código Cypher para busca na base de dados.
-CYPHER_GENERATION_TEMPLATE = """
+CYPHER_DEGREE_GENERATION_TEMPLATE = """
 ou are an expert Neo4j Developer translating user questions into Cypher to answer questions about movies and provide recommendations.
 Convert the user's question based on the schema.
 For movie titles that begin with "The", move "the" to the end, For example "The 39 Steps" becomes "39 Steps, The" or "the matrix" becomes "Matrix, The".
@@ -30,22 +30,34 @@ Do not use any other relationship types or properties that are not provided.
 Schema:
 {schema}
 
-Examples:
+When answering questions about degrees of separation organize your answer as follows:
+1. Tell the number of degrees of separation between both people in the first sentense. 
+2. Tell the whole path between people in the following sentenses. 
+Bellow is a suggestion for a possible answer to the question: "How many degrees of separation are there between Viola Davis and Kevin Bacon?"
+Suggested Answer: "There are three degrees of separation between Viola Davis and Kevin Bacon. Viola Davis co-starred with Chris Hemsworth in Blackhat, Chris Hemsworth co-starred with Charlize Theron in Snow White and the Huntsman, and Charlize Theron co-starred with Kevin Bacon in Trapped."
 
-1. Find movies and their genres:
-MATCH (m:Movie)-[:IN_GENRE]->(g)
-WHERE m.title = "Goodfellas"
-RETURN m.title AS title, collect(g.name) AS genres
+Example Cypher code:
 
-2. Recommend a movie by actor:
-MATCH (subject:Person)-[:ACTED_IN|DIRECTED]->(m)<-[:ACTED_IN|DIRECTED]-(p),
-  (p)-[role:ACTED_IN|DIRECTED]->(m2)
-WHERE subject.name = "Al Pacino"
+1. How to find how many degrees of separation there are between two people and the path between them:
+```
+MATCH path = shortestPath(
+  (p1:Person {{name: "Actor 1"}})-[:ACTED_IN|DIRECTED*]-(p2:Person {{name: "Actor 2"}})
+)
+WITH path, p1, p2, relationships(path) AS rels
 RETURN
-  m2.title AS recommendation,
-  collect([ p.name, type(role) ]) AS peopleInCommon,
-  [ (m)-[:IN_GENRE]->(g)<-[:IN_GENRE]-(m2) | g.name ] AS genresInCommon
-ORDER BY size(incommon) DESC, size(genresInCommon) DESC LIMIT 2
+  p1 {{ .name, .born, link:'https://www.themoviedb.org/person/'+ p1.tmdbId }} AS start,
+  p2 {{ .name, .born, link:'https://www.themoviedb.org/person/'+ p2.tmdbId }} AS end,
+  reduce(output = '', i in range(0, length(path)-1) |
+    output + CASE
+      WHEN i = 0 THEN
+       startNode(rels[i]).name + CASE WHEN type(rels[i]) = 'ACTED_IN' THEN ' played '+ rels[i].role +' in 'ELSE ' directed ' END + endNode(rels[i]).title
+       ELSE
+         ' with '+ startNode(rels[i]).name + ', who '+ CASE WHEN type(rels[i]) = 'ACTED_IN' THEN 'played '+ rels[i].role +' in '
+    ELSE 'directed '
+      END + endNode(rels[i]).title
+      END
+  ) AS pathBetweenPeople
+```
 
 Note: Do not include any explanations or apologies in your responses.
 Do not respond to any questions that might ask anything else than for you to construct a Cypher statement.
@@ -58,10 +70,10 @@ Question:
 """
 
 # Criando o prompt a partir do template.
-cypher_prompt = PromptTemplate.from_template(CYPHER_GENERATION_TEMPLATE)
+cypher_prompt = PromptTemplate.from_template(CYPHER_DEGREE_GENERATION_TEMPLATE)
 
 # Gerar a cadeia QA a ser usada pelo agente.
-cypher_qa = GraphCypherQAChain.from_llm(
+cypher_degree = GraphCypherQAChain.from_llm(
     llm,
     graph=graph,
     verbose=True,
@@ -76,6 +88,6 @@ def generate_response(prompt):
     """
 
     # Handle the response
-    response = cypher_qa.run(prompt)
+    response = cypher_degree.run(prompt)
 
     return response

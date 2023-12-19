@@ -3,6 +3,9 @@ import streamlit as st
 # Importando o Neo4j Vector Store.
 from langchain.vectorstores.neo4j_vector import Neo4jVector
 
+# Importando classe qa_with_sources.
+from langchain.chains.qa_with_sources import load_qa_with_sources_chain
+
 # Importando o a classe RetrievalQA.
 from langchain.chains import RetrievalQA
 
@@ -46,8 +49,8 @@ kg_qa = RetrievalQA.from_chain_type(
 # Gerando a função com a resposta.
 def generate_response(prompt):
     """
-    Use the Neo4j Vector Search Index
-    to augment the response from the LLM
+    Usando o Vector Search Index do Neo4j para
+    aumentar (aprimorar) a resposta do LLM.
     """
 
     # Handle the response
