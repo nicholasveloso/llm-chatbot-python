@@ -20,14 +20,14 @@ from tools.degree import cypher_degree
 tools = [
     # Ferramenta para fazer a buscas do número de graus de separação e caminho entre duas pessoas.
         Tool.from_function(
-        name="Cypher Six Degrees of Kevin Bacon",
-        description="Provide information about movie questions on how to connect an actor, actress, or director, and then connect them to another actor, actress, or director via a film that both actors have appeared in together, repeating this process to try to find the shortest path that ultimately leads to prolific American actor Kevin Bacon.",
+        name="Cypher Degrees of Separation and shortest movie path",
+        description="Provide information about how many degrees of separation there are between two people via a movie they share in common using Cypher, and try to find the shortest path between them.",
         func = cypher_degree,
     ),
     # Ferramenta para fazer busca na nase de dados de grafos usando Cypher.
         Tool.from_function(
         name="Cypher QA",
-        description="Provide information about movies questions using Cypher. Also, use to find how many degrees of separation are there, and the path, between two people.",
+        description="Provide information about movies questions using Cypher. Also.",
         func = cypher_qa,
     ),
     # Ferramenta para fazer busca semântica usando o Vector Index e retornar informações sobre enredo dos filmes.
