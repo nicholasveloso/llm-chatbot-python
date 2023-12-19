@@ -4,7 +4,7 @@ from langchain.prompts.chat import (
     ChatPromptTemplate,
     SystemMessagePromptTemplate,
     HumanMessagePromptTemplate,
-)
+) 
 
 # A cadeia de QA para criação de código Cypher.
 from langchain.chains import GraphCypherQAChain
