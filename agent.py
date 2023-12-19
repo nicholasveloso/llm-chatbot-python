@@ -1,8 +1,9 @@
 # Importando a classe Tool.
 from langchain.tools import Tool
 
-# Importando elementos para agentes.
-from langchain.agents import AgentType, initialize_agent
+# Importando métodos necessários para os agentes.
+from langchain.agents import initialize_agent, AgentType
+from langchain.agents import ConversationalChatAgent
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 
 # Incluíndo o LLM gerado no arquivo llm.py.
@@ -18,7 +19,7 @@ tools = [
     # Ferramenta para fazer busca na nase de dados de grafos usando Cypher.
         Tool.from_function(
         name="Cypher QA",
-        description="Provide information about movies questions using Cypher. It also allows you to play the Kevin Bacon's Six Degree Separation Game using Cypher.",
+        description="Provide information about movies questions using Cypher. Also allows to find the path between two pepople and their degree separation.",
         func = cypher_qa,
     ),
     # Ferramenta para fazer busca semântica usando o Vector 
